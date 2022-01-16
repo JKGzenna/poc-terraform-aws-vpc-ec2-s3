@@ -17,7 +17,7 @@ resource "aws_vpc" "microsites_vpc" {
 }
 
 resource "aws_internet_gateway" "gtw_web_internet" {
-  vpc_id = "${aws_vpc.microsites_vpc.id}"
+  vpc_id = aws_vpc.microsites_vpc.id
 
   tags = {
     Name = "Gateway Web Internet"
@@ -25,7 +25,7 @@ resource "aws_internet_gateway" "gtw_web_internet" {
 }
 
 resource "aws_subnet" "private_subnet" {
-  vpc_id     = "${aws_vpc.microsites_vpc.id}"
+  vpc_id = aws_vpc.microsites_vpc.id
   cidr_block = "10.0.1.0/24"
 
   tags = {
@@ -34,7 +34,7 @@ resource "aws_subnet" "private_subnet" {
 }
 
 resource "aws_subnet" "public_subnet" {
-  vpc_id     = "${aws_vpc.microsites_vpc.id}"
+  vpc_id = aws_vpc.microsites_vpc.id
   cidr_block = "10.0.2.0/24"
 
   tags = {
@@ -43,11 +43,11 @@ resource "aws_subnet" "public_subnet" {
 }
 
 resource "aws_route_table" "public_rt" {
-  vpc_id     = "${aws_vpc.microsites_vpc.id}"
+  vpc_id = aws_vpc.microsites_vpc.id
 
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = "${aws_internet_gateway.gtw_web_internet.id}"
+    gateway_id = aws_internet_gateway.gtw_web_internet.id
   }
 
   tags = {
@@ -72,9 +72,9 @@ resource "aws_security_group" "allow_ssh" {
 }
 
 resource "aws_instance" "web_server" {
-  ami = "${var.ami}"
+  ami = var.ami
   instance_type = "t2.micro"
-  key_name = "${var.ec2-key}"
+  key_name = var.ec2-key
   vpc_security_group_ids = ["${aws_security_group.allow_ssh.id}"]
 
   tags = {
