@@ -2,7 +2,7 @@ variable "bucketName"{
 }
 
 resource "aws_s3_bucket" "newbucket" {
-  bucket = "${var.bucketName}"
+  bucket = var.bucketName
   acl    = "private"
   
   #Remove the below line if you don't want versioning
