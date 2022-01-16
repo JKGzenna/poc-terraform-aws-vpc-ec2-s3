@@ -20,7 +20,7 @@ resource "aws_s3_bucket" "newbucket" {
 }
 
 resource "aws_s3_bucket_object" "object" {
-  # .bucket references the bucket name below
+  # bucket references the bucket name below
   bucket = aws_s3_bucket.newbucket.bucket
   key    = "file.txt"
   # replace with a file path on your machine
