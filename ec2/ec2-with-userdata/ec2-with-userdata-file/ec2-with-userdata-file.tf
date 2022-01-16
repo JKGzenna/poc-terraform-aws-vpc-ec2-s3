@@ -2,13 +2,9 @@ provider "aws" {
   region = "eu-west-1"
 }
 
-variable "key_name" {
-}
-
 resource "aws_instance" "microsites_server" {
   ami = "ami-0aef57767f5404a3c"
   instance_type = "t2.micro"
-  key_name = var.key_name
 
   user_data = "${file("userdata.sh")}"
 
@@ -46,7 +42,7 @@ resource "aws_security_group" "allow_http" {
   }
 
   tags = {
-    Name = "allow_all_http_ssh"
+    Name = "Allow all HTTP SSH"
   }
 }
 

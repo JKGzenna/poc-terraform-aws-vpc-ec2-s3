@@ -11,8 +11,4 @@ terraform init
 4) Apply and launch the EC2
 ```console
 terraform apply
-```
-
-**You will need to enter the name of the ec2 key pair when asked
-
-
+``

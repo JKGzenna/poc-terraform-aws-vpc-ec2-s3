@@ -2,13 +2,9 @@ provider "aws" {
   region = "eu-west-1"
 }
 
-variable "key_name" {
-}
-
 resource "aws_instance" "microsites_server" {
   ami = "ami-0aef57767f5404a3c"
   instance_type = "t2.micro"
-  key_name = var.key_name
 
   user_data = <<-EOF
   #!/bin/bash
